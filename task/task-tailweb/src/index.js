@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 
 mongoose
   .connect(
-    "mongodb+srv://shubham1008sh:w7s59M5WOhEchvCS@cluster0.ovhwygy.mongodb.net/test",
+    "mongodb+srv://shubham108h:LOhyTHS7kcSijNsz@cluster0.ovhwygy.mongodb.net/shubham108h",
     {
       useNewUrlParser: true,
     }

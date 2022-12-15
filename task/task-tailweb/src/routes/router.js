@@ -1,12 +1,19 @@
-const express =require("express")
-const router=express.Router()
-const signupController=require("../controller/signUpController")
-const loginController=require("../controller/loginController")
+const express = require("express");
+const router = express.Router();
+const studentController = require("../controller/studentController.js");
+const adminController = require("../controller/adminController.js");
+const auth = require("../middleware/auth.js");
 
+// Admin
+router.post("/registerAdmin", adminController.adminRegister);
+router.post("/logInAdmin", adminController.logInAdmin);
 
-router.post("/user/register",signupController.signupUser)
-
-router.post("/logInuser",loginController.login)
+// student
+router.post("/studentRegister", auth.authentication,auth.Authorisation, studentController.studentRegister);
+router.get("/filterStudent",auth.authentication,auth.Authorisation,studentController.filterStudent);
+router.get("/getAllStudent",auth.authentication,auth.Authorisation,studentController.getAllStudent);
+router.post("/editStudent",auth.authentication, auth.Authorisation,studentController.editStudent);
+router.delete("/deleteStudent",auth.authentication,auth.Authorisation, studentController.deleteStudent);
 
 router.all("/*", function (req, res) {
   res.status(404).send({
@@ -14,5 +21,4 @@ router.all("/*", function (req, res) {
     message: "Make Sure Your Endpoint is Correct !!!",
   });
 });
-
-module.exports=router
+module.exports = router;
